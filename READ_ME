@@ -1,0 +1,5 @@
+Welcome to my simple platformer game! In this game, you take on the role of the player with the goal of reaching the other side of the level. However, there will be various blocks strategically blocking your pathway, adding an element of challenge to each step.
+Each step is divided into their own unique file and modify whatever you think needs fixing!
+Controls:
+A, D or Left, Right arrow keys.
+Space to jump.
