@@ -5,7 +5,16 @@ from board import Board
 from colorRect import ColorRect
 from obstacle import Obstacle
 from player import Player
+
+
 # from triangle import Triangle
+
+
+def game_over():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            return True
+    return False
 
 
 class Game:
@@ -24,24 +33,18 @@ class Game:
         self.player = Player(screen, self.SCREEN_WIDTH, self.SCREEN_HEIGHT, land_top)
 
         obstacle_color = pygame.Color(255, 0, 0)
-        # self.obstacles = [Triangle.generate_random_triangle(screen,
-        #                                                     obstacle_color,
-        #                                                     self.TRIANGLE_EDGE_LENGTH,
-        #                                                     self.player.top_left,
-        #                                                     self.player.size,
-        #                                                     self.SCREEN_WIDTH,
-        #                                                     self.SCREEN_HEIGHT,
-        #                                                     self.land.top) for i in range(3)]
 
-        self.obstacles = [Obstacle.create_obstacle(screen, self.SCREEN_WIDTH, self.player, land_top, obstacle_color) for i in range(4)]
+        self.obstacles = [Obstacle.create_obstacle(screen, self.SCREEN_WIDTH, self.player, land_top, obstacle_color) for
+                          i in range(4)]
+
     def play_music(self):
-        winsound.PlaySound("Fluffing a Duck.wav", winsound.SND_ALIAS | winsound.SND_ASYNC | winsound.SND_LOOP)
+        winsound.PlaySound("background_music.wav", winsound.SND_ALIAS | winsound.SND_ASYNC | winsound.SND_LOOP)
 
     def run(self):
         clock = pygame.time.Clock()
 
         self.play_music()
-        while not self.game_over():
+        while not game_over():
 
             self.player.move_horizontally(self.obstacles)
             self.player.jumping_check(self.obstacles)
@@ -63,10 +66,3 @@ class Game:
             self.player.check_for_touching_obstacle(self.obstacles)
 
             pygame.display.flip()
-
-    def game_over(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return True
-        return False
-

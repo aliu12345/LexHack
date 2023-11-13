@@ -38,17 +38,11 @@ class Player(pygame.Rect):
     def apply_gravity(self, obstacles):
         if not self.jumping:
             new_top = self.y + 0.5 * self.clock.tick(60)  # self.gravity
-            print(f"new top: {new_top}")
-            print("Gravity reached")
 
             new_feet = new_top + self.height
-            print(f"gravity: {self.gravity}")
-            print(f"new_feet: {new_feet}")
             if new_feet <= self.land_top:
-                print(f"y: {self.y}")
                 if not self.is_touching_obstacle([self.left, new_top, self.w, self.h], obstacles):
                     self.update(self.left, new_top, self.w, self.h)
-                print(f"After updating {self.y}")
 
     def move_horizontally(self, obstacles):
         pressed = pygame.key.get_pressed()
@@ -75,7 +69,6 @@ class Player(pygame.Rect):
             self.jump_count += 1
 
         if self.jumping:
-            print(f"jumping: self.y {self.y}, self.jump_speed: {self.jump_speed}")
             top = self.y - 0.5 * self.clock.tick(60) # self.jump_speed
             if top < 0:
                 top = 0
@@ -84,7 +77,6 @@ class Player(pygame.Rect):
             if self.jump_start - top > self.h * 3:
                 self.jumping = False
 
-            print(f"jumping: top: {top}")
             if not self.is_touching_obstacle([self.left, top, self.w, self.h], obstacles):
                 self.update(self.left, top, self.w, self.h)
 
